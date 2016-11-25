@@ -9,7 +9,7 @@ package calculator;
  *
  * @author HOME
  */
-public class Calculator_Source extends javax.swing.JFrame {
+public class Calculator_Java extends javax.swing.JFrame {
     int num = 0;
     int median = 0;
     int result = 0;
@@ -19,7 +19,7 @@ public class Calculator_Source extends javax.swing.JFrame {
     /**
      * Creates new form Calculator_Source
      */
-    public Calculator_Source() {
+    public Calculator_Java() {
         initComponents();
     }
 
@@ -733,20 +733,21 @@ public class Calculator_Source extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Calculator_Source.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator_Java.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Calculator_Source.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator_Java.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Calculator_Source.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator_Java.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Calculator_Source.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator_Java.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Calculator_Source().setVisible(true);
+                new Calculator_Java().setVisible(true);
             }
         });
     }
