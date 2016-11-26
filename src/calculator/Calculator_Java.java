@@ -225,8 +225,18 @@ public class Calculator_Java extends javax.swing.JFrame {
         });
 
         jButtonCE.setText("CE");
+        jButtonCE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCEActionPerformed(evt);
+            }
+        });
 
         jButtonC.setText("C");
+        jButtonC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCActionPerformed(evt);
+            }
+        });
 
         jButtonSta.setText("Sta");
 
@@ -757,18 +767,20 @@ public class Calculator_Java extends javax.swing.JFrame {
 
     private void jButtonAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAMActionPerformed
         if(Symbol == false){
-            jTextField1.setText("+");
+            jTextField1.setText("+" + numS);
             Symbol = true;
         }else{
-            jTextField1.setText("-");
+            jTextField1.setText("-" + numS);
             Symbol = false;
         }
     }//GEN-LAST:event_jButtonAMActionPerformed
 
     private void jButtonAtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtActionPerformed
-        numS = jTextField1.getText() + "."; // 소수점을 선택하면,
-        dp = true; // dp를 true로 변환
-        jTextField1.setText(numS); // 소수점을 찍은 numS를 출력
+        if(dp == false){
+            numS = jTextField1.getText() + "."; // 소수점을 선택하면,
+            dp = true; // dp를 true로 변환
+            jTextField1.setText(numS); // 소수점을 찍은 numS를 출력
+        }
     }//GEN-LAST:event_jButtonAtActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
@@ -913,8 +925,25 @@ public class Calculator_Java extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDialogActionPerformed
 
     private void jButtonBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackspaceActionPerformed
-        
+        String temp = jTextField1.getText();
+        temp = temp.substring(0, temp.length()-1); // 마지막 문자를 지운다.
+        numS = temp;
+        jTextField1.setText(temp);
     }//GEN-LAST:event_jButtonBackspaceActionPerformed
+
+    private void jButtonCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCEActionPerformed
+        jTextField1.setText("");
+        numS = "";
+    }//GEN-LAST:event_jButtonCEActionPerformed
+
+    private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextFieldOper.setText("");
+        num = 0;
+        numS = "";
+        oper = "";
+    }//GEN-LAST:event_jButtonCActionPerformed
 
     /**
      * @param args the command line arguments
