@@ -10,7 +10,10 @@ package calculator;
  * @author HOME
  */
 public class Calculator_Java extends javax.swing.JFrame {
+    int MSn;
+    double []MS;
     double num; // 첫번째 숫자와 계산을 저장하는 변수
+    double resultn;
     String result; // 마지막 결과를 나타내 줄 변수
     String numS; // setText에 표현될 숫자를 저장하는 변수
     String oper; // 연산기호를 저장하는 변수
@@ -22,7 +25,10 @@ public class Calculator_Java extends javax.swing.JFrame {
      */
     public Calculator_Java() {
         initComponents();
+        MSn = 0;
+        MS = new double[MSn];
         num = 0;
+        resultn = 0;
         result = "";
         numS = "";
         oper = "";
@@ -40,28 +46,22 @@ public class Calculator_Java extends javax.swing.JFrame {
         switch(oper){
             case "+":
                 num =  num + Double.parseDouble(numS);
-                numS = String.valueOf(num);
-                jTextField2.setText(numS);
                 break;
                     
             case "-":
                 num =  num - Double.parseDouble(numS);
-                numS = String.valueOf(num);
-                jTextField2.setText(numS);
                 break;
                     
             case "*":
                 num =  num * Double.parseDouble(numS);
-                numS = String.valueOf(num);
-                jTextField2.setText(numS);
                 break;
                     
             case "/":
                 num =  num / Double.parseDouble(numS);
-                numS = String.valueOf(num);
-                jTextField2.setText(numS);
                 break;
         }
+        numS = String.valueOf(num);
+        jTextField2.setText(numS);
     }
 
     /**
@@ -252,6 +252,11 @@ public class Calculator_Java extends javax.swing.JFrame {
         jButtonRight.setText(")");
 
         jButtonMC.setText("MC");
+        jButtonMC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMCActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("7");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -407,6 +412,11 @@ public class Calculator_Java extends javax.swing.JFrame {
         jButtonMR.setText("MR");
 
         jButtonMS.setText("MS");
+        jButtonMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMSActionPerformed(evt);
+            }
+        });
 
         jButtonMP.setText("M+");
 
@@ -911,13 +921,14 @@ public class Calculator_Java extends javax.swing.JFrame {
         }else if(oper.equals("/")){
             num = num / Double.parseDouble(numS);
         }
-        
         oper = ""; // oper를 비워주고,
-        numS = jTextField2.getText(); // jTextField2의 수를 가져와 넣는다.
-        result = String.valueOf(num);
-        //result = result.substring(0, result.length()-2);
-        jTextField1.setText("");
-        jTextField2.setText(result);
+        numS = String.valueOf(num);
+        num = 0;
+        // numS = "";
+        jTextField1.setText("0");
+        jTextField2.setText(numS);
+        jTextFieldOper.setText("");
+        // numS = jTextField2.getText(); // jTextField2의 수를 가져와 넣는다.
     }//GEN-LAST:event_jButtonEqualActionPerformed
 
     private void jButtonDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDialogActionPerformed
@@ -926,7 +937,7 @@ public class Calculator_Java extends javax.swing.JFrame {
 
     private void jButtonBackspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackspaceActionPerformed
         String temp = jTextField1.getText();
-        temp = temp.substring(0, temp.length()-1); // 마지막 문자를 지운다.
+        temp = temp.substring(0, temp.length()-1); // 마지막 문자를 지운다(마지막 숫자가 뒤에서부터 몇개를 지울건지 정함).
         numS = temp;
         jTextField1.setText(temp);
     }//GEN-LAST:event_jButtonBackspaceActionPerformed
@@ -944,6 +955,17 @@ public class Calculator_Java extends javax.swing.JFrame {
         numS = "";
         oper = "";
     }//GEN-LAST:event_jButtonCActionPerformed
+
+    private void jButtonMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMSActionPerformed
+        MS[MSn] = num; // 현재 계산결과가 메모리에 저장된다.
+        MSn++;
+    }//GEN-LAST:event_jButtonMSActionPerformed
+
+    private void jButtonMCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMCActionPerformed
+        for(int i=0; i<MS.length;i++){
+            MS[i] = 0;
+        }
+    }//GEN-LAST:event_jButtonMCActionPerformed
 
     /**
      * @param args the command line arguments
