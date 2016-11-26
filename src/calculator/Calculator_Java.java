@@ -12,9 +12,8 @@ package calculator;
 public class Calculator_Java extends javax.swing.JFrame {
     int MSn;
     double []MS;
+    int leftn, rightn;
     double num; // 첫번째 숫자와 계산을 저장하는 변수
-    double resultn;
-    String result; // 마지막 결과를 나타내 줄 변수
     String numS; // setText에 표현될 숫자를 저장하는 변수
     String oper; // 연산기호를 저장하는 변수
     boolean dp; // 소수점을 사용했는지 확인하는 변수
@@ -27,9 +26,9 @@ public class Calculator_Java extends javax.swing.JFrame {
         initComponents();
         MSn = 0;
         MS = new double[MSn];
+        leftn = 0;
+        rightn = 0;
         num = 0;
-        resultn = 0;
-        result = "";
         numS = "";
         oper = "";
         dp = false;
@@ -250,6 +249,11 @@ public class Calculator_Java extends javax.swing.JFrame {
         });
 
         jButtonRight.setText(")");
+        jButtonRight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRightActionPerformed(evt);
+            }
+        });
 
         jButtonMC.setText("MC");
         jButtonMC.addActionListener(new java.awt.event.ActionListener() {
@@ -713,7 +717,10 @@ public class Calculator_Java extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeftActionPerformed
-        // TODO add your handling code here:
+        if(numS.equals("")){
+            numS = "(";
+        }
+        leftn++;
     }//GEN-LAST:event_jButtonLeftActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
@@ -966,6 +973,14 @@ public class Calculator_Java extends javax.swing.JFrame {
             MS[i] = 0;
         }
     }//GEN-LAST:event_jButtonMCActionPerformed
+
+    private void jButtonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRightActionPerformed
+        if(leftn != rightn){
+            numS = numS + ")";
+            jTextField1.setText(numS);
+            rightn++;
+        }
+    }//GEN-LAST:event_jButtonRightActionPerformed
 
     /**
      * @param args the command line arguments
