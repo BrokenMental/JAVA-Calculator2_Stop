@@ -10,17 +10,20 @@ package calculator;
  * @author HOME
  */
 public class Calculator_Java extends javax.swing.JFrame {
-    int num = 0;
-    int median = 0;
-    int result = 0;
-    String numS1 = "";
-    String numS2 = "";
+    double num; // 첫번째 숫자와 계산을 저장하는 변수
+    String result; // 마지막 결과를 나타내 줄 변수
+    String numS; // setText에 표현될 숫자를 저장하는 변수
+    String oper; // 연산기호를 저장하는 변수
 
     /**
      * Creates new form Calculator_Source
      */
     public Calculator_Java() {
         initComponents();
+        num = 0;
+        result = "";
+        numS = "";
+        oper = "";
     }
 
     /**
@@ -102,6 +105,7 @@ public class Calculator_Java extends javax.swing.JFrame {
         jButton56 = new javax.swing.JButton();
         jButton57 = new javax.swing.JButton();
         jButton58 = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -357,9 +361,6 @@ public class Calculator_Java extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -424,14 +425,14 @@ public class Calculator_Java extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonBackspace, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonCE, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jRadioButton5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
                                         .addComponent(jRadioButton6)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,13 +491,20 @@ public class Calculator_Java extends javax.swing.JFrame {
                                     .addComponent(jButtonXor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButtonAnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton38, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(16, 16, 16))))
+                        .addGap(16, 16, 16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
@@ -590,85 +598,62 @@ public class Calculator_Java extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLeftActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){ // 만약 numS1에 +,-,*,/가 있으면,
-            numS2 = jTextField1.getText() + "0"; // numS2에 새로운 수를 넣는다.
-            jTextField1.setText(numS2); // numS2를 출력한다.
-        }else{ // numS1에 +,-,*,/가 없으면,
-            numS1 = jTextField1.getText() + "0"; // numS1에 새로운 수를 넣는다.
-            jTextField1.setText(numS1); // numS1을 출력한다.
+        numS = jTextField1.getText() + "0"; // numS에 새로운 수를 넣는다.
+        jTextField1.setText(numS); // numS을 출력한다.
+        /*
+        if(oper.equals("+") || oper.equals("-") || oper.equals("*") || oper.equals("/")){ // 만약 oper에 +,-,*,/가 있으면,
+            numS = jTextField1.getText() + "0"; // numS에 새로운 수를 넣는다.
+            jTextField1.setText(numS); // numS를 출력한다.
+        }else{ // oper에 +,-,*,/가 없으면(맨 처음이면),
+            numS = jTextField1.getText() + "0"; // numS에 새로운 수를 넣는다.
+            jTextField1.setText(numS); // numS을 출력한다.
         }
+        */
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "1";
-        }
-        numS1 = jTextField1.getText() + "1";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "1";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "2";
-        }
-        numS1 = jTextField1.getText() + "2";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "2";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "3";
-        }
-        numS1 = jTextField1.getText() + "3";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "3";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "4";
-        }
-        numS1 = jTextField1.getText() + "4";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "4";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "5";
-        }
-        numS1 = jTextField1.getText() + "5";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "5";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "6";
-        }
-        numS1 = jTextField1.getText() + "6";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "6";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "7";
-        }
-        numS1 = jTextField1.getText() + "7";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "7";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "8";
-        }
-        numS1 = jTextField1.getText() + "8";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "8";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){
-            numS2 = jTextField1.getText() + "9";
-        }
-        numS1 = jTextField1.getText() + "9";
-        jTextField1.setText(numS1);
+        numS = jTextField1.getText() + "9";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButtonAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAMActionPerformed
@@ -676,44 +661,120 @@ public class Calculator_Java extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAMActionPerformed
 
     private void jButtonAtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtActionPerformed
-        numS1 = jTextField1.getText() + ".";
+        numS = jTextField1.getText() + ".";
+        jTextField1.setText(numS);
     }//GEN-LAST:event_jButtonAtActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        if(numS1.equals("+") || numS1.equals("-") || numS1.equals("*") || numS1.equals("/")){ // 만약 numS1에 +,-,*,/가 있으면,
-            num = Integer.parseInt(numS2) + num; // num에 들어있는 수와 numS2를 정수형으로 변환한 수를 더해서 num에 넣는다.
-            numS1 = ""; // numS1은 초기화한다.
-        }else{
-            if(!jTextField1.getText().equals(null)){
-                num = Integer.parseInt(numS1);
-                numS1 = "+";
+        if(oper.equals("+") || oper.equals("-") || oper.equals("*") || oper.equals("/")){ // 만약 oper에 +,-,*,/가 있으면,
+            if(numS == null){ // 만약 numS가 null이라면(연산기호를 클릭하고 또 연산기호를 클릭했을 경우),
+                oper = "+"; // oper를 교체해주고,
+                jTextField2.setText(num + "+"); // 표시도 교체해준다.
+            }else{ // numS가 null이 아니라면,
+                num =  num + Double.parseDouble(numS); // num에 들어있는 수와 numS를 실수형으로 변환한 수를 계산해서 num에 넣는다.
+                oper = null; // oper를 초기화한다.
+                jTextField2.setText(num + "+"); // 계산한 num과 +를 따로 표시해준다.
+                jTextField1.setText(null); // jTextField1을 비워준다.
+            }
+        }else{ // oper에 +,-,*,/가 없다면,
+            num = Double.parseDouble(numS); // num에 numS를 넣어준다.
+            oper = "+"; // +문자를 oper에 넣는다.
+            jTextField2.setText(numS + "+"); // num과 +를 표시해준다.
+            jTextField1.setText(null); // jTextField1을 비워준다.
+            numS = null; // numS도 비워준다.
+            
+            if(jTextField1.getText() == null){ // oper에 연산기호가 없는데 jTextField1이 null이면(맨 처음이면),
+                jTextField1.setText("숫자를 먼저 입력해주세요."); // "숫자를 먼저 입력해주세요"를 표시해준다.
             }     
         }
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jButtonMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMinActionPerformed
-        if(!jTextField1.getText().equals(null)){
-            num = Integer.parseInt(numS1);
-            numS1 = jTextField1.getText() + "-";
+        if(oper.equals("+") || oper.equals("-") || oper.equals("*") || oper.equals("/")){
+            if(numS == null){
+                oper = "-";
+                jTextField2.setText(num + "-");
+            }else{
+                num =  num - Double.parseDouble(numS);
+                oper = null;
+                jTextField2.setText(num + "-");
+                jTextField1.setText(null);
+            }
+        }else{
+            num = Double.parseDouble(numS);
+            oper = "-";
+            jTextField2.setText(numS + "-");
+            jTextField1.setText(null);
+            numS = null;
+            
+            if(jTextField1.getText() == null){
+                jTextField1.setText("숫자를 먼저 입력해주세요.");
+            }     
         }
     }//GEN-LAST:event_jButtonMinActionPerformed
 
     private void jButtonMulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMulActionPerformed
-        if(!jTextField1.getText().equals(null)){
-            num = Integer.parseInt(numS1);
-            numS1 = jTextField1.getText() + "*";
+        if(oper.equals("+") || oper.equals("-") || oper.equals("*") || oper.equals("/")){
+            if(numS == null){
+                oper = "*";
+                jTextField2.setText(num + "*");
+            }else{
+                num =  num * Double.parseDouble(numS);
+                oper = null;
+                jTextField2.setText(num + "*");
+                jTextField1.setText(null);
+            }
+        }else{
+            num = Double.parseDouble(numS);
+            oper = "*";
+            jTextField2.setText(numS + "*");
+            jTextField1.setText(null);
+            numS = null;
+            
+            if(jTextField1.getText() == null){
+                jTextField1.setText("숫자를 먼저 입력해주세요.");
+            }     
         }
     }//GEN-LAST:event_jButtonMulActionPerformed
 
     private void jButtonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivActionPerformed
-        if(!jTextField1.getText().equals(null)){
-            num = Integer.parseInt(numS1);
-            numS1 = jTextField1.getText() + "/";
+        if(oper.equals("+") || oper.equals("-") || oper.equals("*") || oper.equals("/")){
+            if(numS == null){
+                oper = "/";
+                jTextField2.setText(num + "/");
+            }else{
+                num =  num / Double.parseDouble(numS);
+                oper = null;
+                jTextField2.setText(num + "/");
+                jTextField1.setText(null);
+            }
+        }else{
+            num = Double.parseDouble(numS);
+            oper = "/";
+            jTextField2.setText(numS + "/");
+            jTextField1.setText(null);
+            numS = null;
+            
+            if(jTextField1.getText() == null){
+                jTextField1.setText("숫자를 먼저 입력해주세요.");
+            }     
         }
     }//GEN-LAST:event_jButtonDivActionPerformed
 
     private void jButtonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEqualActionPerformed
+        if(oper.equals("+")){
+            num = num + Double.parseDouble(numS);
+        }else if(oper.equals("-")){
+            num = num - Double.parseDouble(numS);
+        }else if(oper.equals("*")){
+            num = num * Double.parseDouble(numS);
+        }else if(oper.equals("/")){
+            num = num / Double.parseDouble(numS);
+        }
         
+        result = String.valueOf(num);
+        jTextField1.setText(result);
+        jTextField2.setText(null);
     }//GEN-LAST:event_jButtonEqualActionPerformed
 
     /**
@@ -823,5 +884,6 @@ public class Calculator_Java extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
